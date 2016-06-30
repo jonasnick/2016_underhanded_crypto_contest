@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 #
-# This script creates a backdoored "burn" address and demonstrates exploitation
-# of the backdoor.
-# This script assumes bitcoind is running and in regtest mode.
+# This script creates a backdoored "burn" address and demonstrates
+# exploitation of the backdoor. It assumes bitcoind is running and
+# in regtest mode.
 #
 
 import os
@@ -27,9 +27,7 @@ multisig_script = [OP_2, pubkey_multisig, pubkey_single, OP_2,
                    OP_CHECKMULTISIG]
 
 # Sign message "1" with seckey_single and prepend to script.
-HASH_ONE = b"\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00 \
-             \x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00 \
-             \x00\x00\x00\x00"
+HASH_ONE = b"\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
 sig = seckey_single.sign(HASH_ONE) + bytes([SIGHASH_SINGLE])
 redeemScript = CScript([sig] + multisig_script)
 
